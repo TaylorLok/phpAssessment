@@ -81,7 +81,7 @@
 
 	if($_SERVER['REQUEST_METHOD']=="POST")
 	{
-		if(isset($_FILES['image']) && FILES['image']['type'] == 'image/jpg')
+		if(isset($_FILES['image']) && $_FILES['image']['type'] == 'image/jpg')
 		{
 			move_uploaded_file($_FILES['image']['tmp_name'],$_FILES['image']['name']);
 
