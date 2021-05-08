@@ -4,7 +4,7 @@
 <?php
 class Assessment{
 	
-	 	public $staffMember = 250;
+	 	public $staffMember = "newProduct";
     	public $productImage= 300;
     	public $original_image = 0;
 
@@ -93,29 +93,30 @@ class Assessment{
 			}
 		}
 	}
+	public function store(Request $request)
+	{
+		if($_SERVER['REQUEST_METHOD']=="POST")
+		{
+			if(isset($_FILES['image']) && $_FILES['image']['type'] == 'image/jpg')
+			{
+				move_uploaded_file($_FILES['image']['tmp_name'],$_FILES['image']['name']);
 
-	// if($_SERVER['REQUEST_METHOD']=="POST")
-	// {
-	// 	if(isset($_FILES['image']) && $_FILES['image']['type'] == 'image/jpg')
-	// 	{
-	// 		move_uploaded_file($_FILES['image']['tmp_name'],$_FILES['image']['name']);
+				$file = $_FILES['image']['name'];
 
-	// 		$file = $_FILES['image']['name'];
+				//resize
+				resize($file,"300");
 
-	// 		//resize
-	// 		resize($file,"300");
+				//crop
+				crop($file,"300");
 
-	// 		//crop
-	// 		crop($file,"300");
-
-	// 		echo "<img src='$file' style=''/>";
-	// 	}
-	// 	else
-	// 	{
-	// 		echo "file not supported";
-	// 	}
-	// }	
-
+			echo "<img src='$file' style=''/>";
+			}
+			else
+			{
+			echo "file not supported";
+			}
+		}	
+	}	
 } 
 
 ?>
