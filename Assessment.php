@@ -1,6 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
 <?php
+class Assessment{
+	
+	 	public $staffMember = 250;
+    	public $productImage= 300;
+    	public $original_image = 0;
 
-	function resize($file,$max_res)
+     public function __construct($staffMember, $productImage)
+    {
+        $this->staffMember = $staffMember;
+        $this->productImage = $productImage;
+    }
+
+
+	public function resize($file,$max_res)
 	{
 		if(file_exists($file))
 		{
@@ -31,7 +46,7 @@
 		}
 	}
 
-		function crop($file,$max_res)
+	public function crop($file,$max_res)
 	{
 		if(file_exists($file))
 		{
@@ -79,29 +94,34 @@
 		}
 	}
 
-	if($_SERVER['REQUEST_METHOD']=="POST")
-	{
-		if(isset($_FILES['image']) && $_FILES['image']['type'] == 'image/jpg')
-		{
-			move_uploaded_file($_FILES['image']['tmp_name'],$_FILES['image']['name']);
+	// if($_SERVER['REQUEST_METHOD']=="POST")
+	// {
+	// 	if(isset($_FILES['image']) && $_FILES['image']['type'] == 'image/jpg')
+	// 	{
+	// 		move_uploaded_file($_FILES['image']['tmp_name'],$_FILES['image']['name']);
 
-			$file = $_FILES['image']['name'];
+	// 		$file = $_FILES['image']['name'];
 
-			//resize
-			resize($file,"300");
+	// 		//resize
+	// 		resize($file,"300");
 
-			//crop
-			crop($file,"300");
+	// 		//crop
+	// 		crop($file,"300");
 
-			echo "<img src='$file' style=''/>";
-		}
-		else
-		{
-			echo "file not supported";
-		}
-	}	
+	// 		echo "<img src='$file' style=''/>";
+	// 	}
+	// 	else
+	// 	{
+	// 		echo "file not supported";
+	// 	}
+	// }	
+
+} 
 
 ?>
+</body>
+</html>
+
 
 <form method="post" enctype="multipart/form-data">
 
